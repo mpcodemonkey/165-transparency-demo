@@ -12,3 +12,8 @@ Features include:
 Missing:
 - Some source and destination functions
 - All blend equations
+
+Current Objectives:
+- Implement remaining Source, Dest, and Equation actions in BlendMenu
+- Clean up assignment specific code(remove and/or obfuscate)
+- Replace object model with one that has a proper vertex mapping
