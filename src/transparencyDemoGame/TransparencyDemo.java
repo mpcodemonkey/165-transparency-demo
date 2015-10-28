@@ -77,7 +77,7 @@ public class TransparencyDemo extends BaseGame {
 	IRenderer renderer;
 	private SkyBox s, s1;
 	// set a time for the game to end
-	private  int endTime = 120, spawntimer = 0;
+	private  int endTime = 500, spawntimer = 0;
 	private RotationController treasureRotationController;
 	private TranslationController treasureTranslationController;
 	protected Group rotGroup;
@@ -85,7 +85,8 @@ public class TransparencyDemo extends BaseGame {
 	private Avatar p1;
 	private ArrayList<Controller> controls;
 	private ArrayList<Avatar> numOfPlayers;
-	private Group sun;
+	private Group sun, root;
+	private BlendState bl;
 
 	private Camera3Pcontroller cam1Con;
 	private PlayerHUD hud1;
@@ -226,7 +227,9 @@ public class TransparencyDemo extends BaseGame {
 		p1 = new Avatar();
 		p1.translate(10, 1, 95);
 		// p1.rotate(180, new Vector3D(0,1,0));
-		this.addGameWorldObject(p1);
+		root.addChild(p1);
+		this.addGameWorldObject(root);
+		//this.addGameWorldObject(p1);
 		p1.updateLocalBound();
 		p1.updateWorldBound();
 		numOfPlayers.add(p1);
@@ -306,7 +309,7 @@ public class TransparencyDemo extends BaseGame {
 
 	private void createTransparencyGroup() {
 		
-		BlendState bl = createBlendState();
+		bl = createBlendState();
 		
 		CoinTreasure center = new CoinTreasure();
 		
@@ -381,7 +384,10 @@ public class TransparencyDemo extends BaseGame {
 		//make one planet opaque
 		r2.clearRenderState(RenderStateType.Blend);
 		
-		this.addGameWorldObject(sun);
+		root = new Group("root-node");
+		root.addChild(sun);
+		
+		this.addGameWorldObject(root);
 	}
 
 	/**
@@ -501,6 +507,135 @@ public class TransparencyDemo extends BaseGame {
 
 	public void addGameWorldObject(SceneNode s) {
 		super.addGameWorldObject(s);
+	}
+
+	public void alterBlendState(int src, int dest, int test) {
+		alterSource(src);
+		alterDest(dest);
+		alterTest(test);
+		System.out.println("Source function: " + src + " Dest function: " + dest + " Test Function: " + test);
+		
+		//update all object render states
+		sun.updateRenderStates();
+		
+	}
+
+	private void alterSource(int src) {
+		switch(src){
+			case 1: bl.setSourceFunction(BlendState.SourceFunction.SourceAlpha);
+			break;
+			
+			case 2: bl.setSourceFunction(BlendState.SourceFunction.DestinationAlpha);
+			break;
+			
+			case 3: bl.setSourceFunction(BlendState.SourceFunction.ConstantAlpha);
+			break;
+			
+			case 4: bl.setSourceFunction(BlendState.SourceFunction.ConstantColor);
+			break;
+			
+			case 5: bl.setSourceFunction(BlendState.SourceFunction.DestinationColor);
+			break;
+			
+			case 6: bl.setSourceFunction(BlendState.SourceFunction.One);
+			break;
+			
+			case 7: bl.setSourceFunction(BlendState.SourceFunction.OneMinusConstantAlpha);
+			break;
+			
+			case 8: bl.setSourceFunction(BlendState.SourceFunction.OneMinusConstantColor);
+			break;
+			
+			case 9: bl.setSourceFunction(BlendState.SourceFunction.OneMinusDestinationAlpha);
+			break;
+			
+			case 10: bl.setSourceFunction(BlendState.SourceFunction.OneMinusDestinationColor);
+			break;
+			
+			case 11: bl.setSourceFunction(BlendState.SourceFunction.OneMinusSourceAlpha);
+			break;
+			
+			case 12: bl.setSourceFunction(BlendState.SourceFunction.SourceAlphaSaturate);
+			break;
+			
+			case 13: bl.setSourceFunction(BlendState.SourceFunction.Zero);
+			break;
+			
+			
+		}
+		
+	}
+	
+	private void alterDest(int dest) {
+		switch(dest){
+		case 1: bl.setDestinationFunction(BlendState.DestinationFunction.SourceAlpha);
+		break;
+		
+		case 2: bl.setDestinationFunction(BlendState.DestinationFunction.DestinationAlpha);
+		break;
+		
+		case 3: bl.setDestinationFunction(BlendState.DestinationFunction.ConstantAlpha);
+		break;
+		
+		case 4: bl.setDestinationFunction(BlendState.DestinationFunction.ConstantColor);
+		break;
+		
+		case 5: bl.setDestinationFunction(BlendState.DestinationFunction.SourceColor);
+		break;
+		
+		case 6: bl.setDestinationFunction(BlendState.DestinationFunction.One);
+		break;
+		
+		case 7: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusConstantAlpha);
+		break;
+		
+		case 8: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusConstantColor);
+		break;
+		
+		case 9: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusDestinationAlpha);
+		break;
+		
+		case 10: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceColor);
+		break;
+		
+		case 11: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceAlpha);
+		break;
+		
+		case 12: bl.setDestinationFunction(BlendState.DestinationFunction.Zero);
+		break;
+		
+		}
+		
+	}
+	
+	private void alterTest(int test) {
+		
+		switch(test){
+		case 1: bl.setTestFunction(BlendState.TestFunction.GreaterThan);
+		break;
+		
+		case 2: bl.setTestFunction(BlendState.TestFunction.EqualTo);
+		break;
+		
+		case 3: bl.setTestFunction(BlendState.TestFunction.GreaterThanOrEqualTo);
+		break;
+		
+		case 4: bl.setTestFunction(BlendState.TestFunction.Always);
+		break;
+		
+		case 5: bl.setTestFunction(BlendState.TestFunction.LessThan);
+		break;
+		
+		case 6: bl.setTestFunction(BlendState.TestFunction.LessThanOrEqualTo);
+		break;
+		
+		case 7: bl.setTestFunction(BlendState.TestFunction.Never);
+		break;
+		
+		case 8: bl.setTestFunction(BlendState.TestFunction.NotEqualTo);
+		break;
+		
+		}
 	}
 
 }

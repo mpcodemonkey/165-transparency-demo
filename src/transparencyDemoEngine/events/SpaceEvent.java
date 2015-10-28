@@ -13,7 +13,7 @@ public class SpaceEvent extends AbstractInputAction
 	public SpaceEvent(TransparencyDemo fix) 
 	{ 
 		td = fix;
-		bd = new BlendMenu();
+		bd = new BlendMenu(td);
 	} 
 	public void performAction(float time, net.java.games.input.Event e) 
 	{ 
