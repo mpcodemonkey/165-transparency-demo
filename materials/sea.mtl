@@ -1,0 +1,31 @@
+# Blender MTL File: 'Seagull - rev001.blend'
+# Material Count: 3
+
+newmtl Black_flat.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+
+newmtl Seagull.TN
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.701225 0.680743
+Ks 0.027755 0.025462 0.024165
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Jon\\Downloads\\Plates\\bird feathers.jpg
+
+newmtl Seagull.TN_bird_feathers.jpg
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.701225 0.680743
+Ks 0.027755 0.025462 0.024165
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Jon\Downloads\Plates\bird feathers.jpg
