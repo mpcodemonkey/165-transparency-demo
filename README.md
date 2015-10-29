@@ -10,9 +10,8 @@ Features include:
 - a menu(press space to access) that displays a blend menu for modifying blend functions on the fly
 
 Missing:
-- All blend equations
+- Multiple SceneNode groups with different blend functions applied to each
 
 Current Objectives:
-- Implement remaining Source, Dest, and Equation actions in BlendMenu
 - Clean up assignment specific code(remove and/or obfuscate)
 - Replace object model with one that has a proper vertex mapping

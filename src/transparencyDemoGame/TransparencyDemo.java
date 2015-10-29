@@ -2,16 +2,10 @@ package transparencyDemoGame;
 
 import java.awt.Color;
 import java.awt.DisplayMode;
-import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.ResourceBundle.Control;
-
 import javax.swing.JOptionPane;
 
 import net.java.games.input.Controller;
@@ -21,20 +15,15 @@ import graphicslib3D.Vector3D;
 import sage.app.BaseGame;
 import sage.renderer.IRenderer;
 import sage.scene.Group;
-import sage.scene.HUDString;
 import sage.scene.SceneNode;
-import sage.scene.SceneNode.CULL_MODE;
 import sage.scene.SceneNode.RENDER_MODE;
 import sage.scene.SkyBox;
 import sage.scene.SkyBox.Face;
 import sage.display.*;
 import sage.input.*;
 import sage.input.action.*;
-import sage.event.EventManager;
 import sage.event.IEventManager;
-import sage.scene.shape.Cube;
 import sage.scene.shape.Line;
-import sage.scene.shape.Pyramid;
 import sage.scene.shape.Rectangle;
 import sage.scene.state.BlendState;
 import sage.scene.state.RenderState;
@@ -51,12 +40,10 @@ import transparencyDemoEngine.controls.movement.MoveXAxis;
 import transparencyDemoEngine.controls.movement.MoveYAxis;
 import transparencyDemoEngine.controls.movement.XMoveAction;
 import transparencyDemoEngine.controls.movement.YMoveAction;
-import transparencyDemoEngine.events.AcquireTreasureEvent;
 import transparencyDemoEngine.events.JumpAction;
 import transparencyDemoEngine.events.SpaceEvent;
 import transparencyDemoGame.avatar.Avatar;
 import transparencyDemoGame.treasures.CoinTreasure;
-import transparencyDemoGame.treasures.ITreasure;
 import transparencyDemoGame.treasures.Rupee;
 import transparencyDemoGame.treasures.SpikeBall;
 import transparencyDemoGame.treasures.TreasureLoader;
@@ -67,19 +54,13 @@ import sage.camera.*;
 public class TransparencyDemo extends BaseGame {
 	IDisplaySystem display;
 	ICamera cameraP1;
-	private int scoreP1;
 	private float time = 0; // game elapsed time
-	private int treasureCountP1 = 0, treasureCountP2 = 0;
 	IEventManager eventMgr;
 	// Camera3Pcontroller cc;
 	// ArrayList<Treasure> hoard = new ArrayList<Treasure>();
 	private String bg, hit, otherhit, goodScore, badScore;
 	IRenderer renderer;
-	private SkyBox s, s1;
-	// set a time for the game to end
-	private  int endTime = 500, spawntimer = 0;
-	private RotationController treasureRotationController;
-	private TranslationController treasureTranslationController;
+	private SkyBox s;
 	protected Group rotGroup;
 	protected Group tranGroup;
 	private Avatar p1;
@@ -159,7 +140,7 @@ public class TransparencyDemo extends BaseGame {
 				IAction yAxisMove = new MoveYAxis(currentPlayer, 0.025f);
 				IAction xAxisMove = new MoveXAxis(currentPlayer, 0.025f);
 				IAction jump = new JumpAction(currentPlayer);
-				IAction menu = new SpaceEvent(this);
+				new SpaceEvent(this);
 				System.out.println(controls.get(i).getName());
 				System.out.println(i);
 				im.associateAction(controls.get(i).getName(),
@@ -181,9 +162,9 @@ public class TransparencyDemo extends BaseGame {
 						GlobalAxes.getInstance(), numOfPlayers.get(i));
 				IAction left = new XMoveAction(currentPlayer, -0.025f);
 				IAction right = new XMoveAction(currentPlayer, 0.025f);
-				IAction yawLeft = new YawAction(currentPlayer, .2f,
+				new YawAction(currentPlayer, .2f,
 						GlobalAxes.getInstance());
-				IAction yawRight = new YawAction(currentPlayer, -.2f,
+				new YawAction(currentPlayer, -.2f,
 						GlobalAxes.getInstance());
 				IAction jump = new JumpAction(currentPlayer);
 				IAction menu = new SpaceEvent(this);
@@ -245,17 +226,7 @@ public class TransparencyDemo extends BaseGame {
 
 	private void initAudio() {
 		bg = "bg.wav";
-		hit = "hit.wav";
-		otherhit = "otherhit.wav";
-		goodScore = "winning.wav";
-		badScore = "yousuck.wav";
-
 		SoundRepo.getInstance().addAudioFile(bg);
-		SoundRepo.getInstance().addAudioFile(hit);
-		SoundRepo.getInstance().addAudioFile(otherhit);
-		SoundRepo.getInstance().addAudioFile(goodScore);
-		SoundRepo.getInstance().addAudioFile(badScore);
-
 	}
 
 	private void initGameObjects() {
@@ -320,8 +291,9 @@ public class TransparencyDemo extends BaseGame {
 		Rupee r2 = new Rupee();
 		Rupee r3 = new Rupee();
 		
-		TreasureLoader cube = new TreasureLoader("naga.obj");
-		Texture t = TextureManager.loadTexture2D("." + File.separator + "tex" + File.separator + "mud.jpg");
+		TreasureLoader cube = new TreasureLoader("gem.obj");
+		cube.rotate(90, GlobalAxes.getInstance().getRight());
+		Texture t = TextureManager.loadTexture2D("." + File.separator + "tex" + File.separator + "gem.jpg");
 		t.setApplyMode(Texture.ApplyMode.Replace);
 		cube.setTexture(t);
 		/*
@@ -477,28 +449,6 @@ public class TransparencyDemo extends BaseGame {
 				"Position: X:" + (int)cam1Con.getTargetPosition().getX() + " Y:" + (int)cam1Con.getTargetPosition().getY() + " Z:" + (int)cam1Con.getTargetPosition().getZ());
 
 		super.update(elapsedTimeMS);
-
-		// check if the game has ended due to timeout
-		if (time / 1000 > endTime || scoreP1 > 1500) {
-
-			this.setGameOver(true);
-			SoundRepo.getInstance().retrieveAudioFile(bg).stop();
-			if (this.display.isFullScreen()) {
-				((MyDisplaySystem) display).setShowing(false);
-			}
-			String message = String.format(
-					"Game over! Your Final Scores: %n%-20s%d%n",
-					"Player1:", scoreP1);
-			if (scoreP1 < 1000) {
-				SoundRepo.getInstance().retrieveAudioFile(badScore).play();
-				message += "\nYou fail!";
-			} else{
-				SoundRepo.getInstance().retrieveAudioFile(goodScore).play();
-				message += "\nA winner is you!";
-			}
-			JOptionPane.showMessageDialog(null, message, "Game Over", 1);
-		}
-
 	}
 
 	private void updateAvatars(float elapsedTimeMS) {

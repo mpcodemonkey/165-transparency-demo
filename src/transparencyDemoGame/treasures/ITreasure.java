@@ -1,9 +1,8 @@
 package transparencyDemoGame.treasures;
 
-import sage.scene.Group;
-import sage.scene.bounding.BoundingVolume;
 import graphicslib3D.Matrix3D;
 import graphicslib3D.Vector3D;
+import sage.scene.bounding.BoundingVolume;
 /**
  * 
  * @author Jon
