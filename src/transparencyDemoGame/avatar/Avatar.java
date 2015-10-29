@@ -6,9 +6,9 @@ import graphicslib3D.Vector3D;
 import sage.event.IEventListener;
 import sage.event.IGameEvent;
 import sage.renderer.IRenderer;
-import sage.scene.shape.Pyramid;
+import sage.scene.shape.Cube;
 
-public class Avatar extends Pyramid
+public class Avatar extends Cube
 {
 	private float baseHeight;
 	private float maxHeight;

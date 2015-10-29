@@ -509,11 +509,12 @@ public class TransparencyDemo extends BaseGame {
 		super.addGameWorldObject(s);
 	}
 
-	public void alterBlendState(int src, int dest, int test) {
+	public void alterBlendState(int src, int dest, int test, int blend) {
 		alterSource(src);
 		alterDest(dest);
 		alterTest(test);
-		System.out.println("Source function: " + src + " Dest function: " + dest + " Test Function: " + test);
+		alterBlend(blend);
+		System.out.println("Source function: " + src + " Dest function: " + dest + " Test Function: " + test + " Blend Equation: " + blend);
 		
 		//update all object render states
 		sun.updateRenderStates();
@@ -636,6 +637,29 @@ public class TransparencyDemo extends BaseGame {
 		break;
 		
 		}
+	}
+	
+	private void alterBlend(int blend) {
+		
+		switch(blend){
+		case 1: bl.setBlendEquation(BlendState.BlendEquation.Add);
+		break;
+		
+		case 2: bl.setBlendEquation(BlendState.BlendEquation.Max);
+		break;
+		
+		case 3: bl.setBlendEquation(BlendState.BlendEquation.Min);
+		break;
+		
+		case 4: bl.setBlendEquation(BlendState.BlendEquation.Subtract);
+		break;
+		
+		case 5: bl.setBlendEquation(BlendState.BlendEquation.ReverseSubtract);
+		break;
+		
+		}
+
+		
 	}
 
 }

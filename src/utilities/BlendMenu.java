@@ -38,26 +38,24 @@ public class BlendMenu extends JFrame {
 	public BlendMenu(TransparencyDemo td) {
 		fix = td;
 		setTitle("Blend Menu");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 750, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JSplitPane splitPane = new JSplitPane();
-		contentPane.add(splitPane, BorderLayout.SOUTH);
-		
-		JButton btnApplyChanges = new JButton("Apply Changes");
-
-		splitPane.setLeftComponent(btnApplyChanges);
-		
-		JButton btnExitMenu = new JButton("Exit Menu");
-		splitPane.setRightComponent(btnExitMenu);
-		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -106,11 +104,14 @@ public class BlendMenu extends JFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		ButtonGroup source = new ButtonGroup();
 		ButtonGroup dest = new ButtonGroup();
 		ButtonGroup test = new ButtonGroup();
+		ButtonGroup blend = new ButtonGroup();
 		
 		JLabel lblSourceFunction = new JLabel("Source Function");
 		panel.add(lblSourceFunction, "4, 2");
@@ -120,6 +121,9 @@ public class BlendMenu extends JFrame {
 		
 		JLabel lblTestFunction = new JLabel("Test Function");
 		panel.add(lblTestFunction, "20, 2");
+		
+		JLabel lblBlendEquation = new JLabel("Blend Equation");
+		panel.add(lblBlendEquation, "28, 2");
 		
 		JRadioButton sf_source = new JRadioButton("Source");
 		sf_source.setSelected(true);
@@ -133,6 +137,10 @@ public class BlendMenu extends JFrame {
 		tf_gt.setSelected(true);
 		panel.add(tf_gt, "20, 4");
 		
+		JRadioButton be_add = new JRadioButton("Add");
+		be_add.setSelected(true);
+		panel.add(be_add, "28, 4");
+		
 		JRadioButton sf_dest = new JRadioButton("Dest");
 		panel.add(sf_dest, "4, 6");
 		
@@ -142,6 +150,9 @@ public class BlendMenu extends JFrame {
 		
 		JRadioButton tf_e = new JRadioButton("Equal");
 		panel.add(tf_e, "20, 6");
+		
+		JRadioButton be_max = new JRadioButton("Max");
+		panel.add(be_max, "28, 6");
 		
 		
 		JRadioButton rdbtnConstalpha = new JRadioButton("ConstAlpha");
@@ -153,6 +164,9 @@ public class BlendMenu extends JFrame {
 		JRadioButton tf_gOrE = new JRadioButton("GreaterOrEqual");
 		panel.add(tf_gOrE, "20, 8");
 		
+		JRadioButton be_min = new JRadioButton("Min");
+		panel.add(be_min, "28, 8");
+		
 		JRadioButton rdbtnConstcolor = new JRadioButton("ConstColor");
 		panel.add(rdbtnConstcolor, "4, 10");
 		
@@ -162,6 +176,9 @@ public class BlendMenu extends JFrame {
 		JRadioButton tf_always = new JRadioButton("Always");
 		panel.add(tf_always, "20, 10");
 		
+		JRadioButton be_sub = new JRadioButton("Subtract");
+		panel.add(be_sub, "28, 10");
+		
 		JRadioButton destColorRadioButton = new JRadioButton("DestColor");
 		panel.add(destColorRadioButton, "4, 12");
 		
@@ -170,6 +187,9 @@ public class BlendMenu extends JFrame {
 		
 		JRadioButton tf_lt = new JRadioButton("LessThan");
 		panel.add(tf_lt, "20, 12");
+		
+		JRadioButton be_rev_sub = new JRadioButton("Reverse Sub");
+		panel.add(be_rev_sub, "28, 12");
 		
 		JRadioButton sf_one = new JRadioButton("One");
 		panel.add(sf_one, "4, 14");
@@ -263,10 +283,15 @@ public class BlendMenu extends JFrame {
 		test.add(tf_lOrE);
 		test.add(tf_never);
 		test.add(tf_notEqual);
-		
 
+		blend.add(be_add);
+		blend.add(be_max);
+		blend.add(be_min);
+		blend.add(be_sub);
+		blend.add(be_rev_sub);
 		
-		this.setVisible(false);
+		JButton btnApplyChanges = new JButton("Apply Changes");
+		contentPane.add(btnApplyChanges, BorderLayout.SOUTH);
 		
 		//create action listeners
 		btnApplyChanges.addActionListener(new ActionListener() {
@@ -276,6 +301,7 @@ public class BlendMenu extends JFrame {
 				int selectedSourceFunction = 1;
 				int selectedDestFunction = 1;
 				int selectedTestFunction = 1;
+				int selectedBlendEquation = 1;
 				
 				Enumeration<AbstractButton> sb = source.getElements();
 				while(sb.hasMoreElements()){
@@ -304,9 +330,20 @@ public class BlendMenu extends JFrame {
 					selectedTestFunction++;
 				}
 				
-				fix.alterBlendState(selectedSourceFunction, selectedDestFunction, selectedTestFunction);
+				Enumeration<AbstractButton> bb = blend.getElements();
+				while(bb.hasMoreElements()){
+					JRadioButton jr = (JRadioButton) bb.nextElement();
+					if(jr.isSelected()){
+						break;
+					}
+					selectedBlendEquation++;
+				}
+				
+				fix.alterBlendState(selectedSourceFunction, selectedDestFunction, selectedTestFunction, selectedBlendEquation);
 			}
 		});
+		
+		this.setVisible(false);
 		
 	}
 
