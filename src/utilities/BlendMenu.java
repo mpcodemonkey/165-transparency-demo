@@ -39,7 +39,7 @@ public class BlendMenu extends JFrame {
 		fix = td;
 		setTitle("Blend Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 350);
+		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,6 +79,16 @@ public class BlendMenu extends JFrame {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -161,8 +171,8 @@ public class BlendMenu extends JFrame {
 		JRadioButton tf_lt = new JRadioButton("LessThan");
 		panel.add(tf_lt, "20, 12");
 		
-		JRadioButton oneSRadioButton = new JRadioButton("One");
-		panel.add(oneSRadioButton, "4, 14");
+		JRadioButton sf_one = new JRadioButton("One");
+		panel.add(sf_one, "4, 14");
 		
 		JRadioButton df_one = new JRadioButton("One");
 		panel.add(df_one, "12, 14");
@@ -170,18 +180,66 @@ public class BlendMenu extends JFrame {
 		JRadioButton tf_lOrE = new JRadioButton("LessOrEqual");
 		panel.add(tf_lOrE, "20, 14");
 		
+		JRadioButton sf_one_min_const_alpha = new JRadioButton("OneMinConstAlpha");
+		panel.add(sf_one_min_const_alpha, "4, 16");
+		
+		JRadioButton df_one_min_const_alpha = new JRadioButton("OneMinConstAlpha");
+		panel.add(df_one_min_const_alpha, "12, 16");
+		
 		JRadioButton tf_never = new JRadioButton("Never");
 		panel.add(tf_never, "20, 16");
 		
+		JRadioButton sf_one_min_const_col = new JRadioButton("OneMinConstCol");
+		panel.add(sf_one_min_const_col, "4, 18");
+		
+		JRadioButton df_one_min_const_color = new JRadioButton("OneMinConstCol");
+		panel.add(df_one_min_const_color, "12, 18");
+		
 		JRadioButton tf_notEqual = new JRadioButton("NotEqual");
 		panel.add(tf_notEqual, "20, 18");
+		
+		JRadioButton sf_one_min_dest_alpha = new JRadioButton("OneMinDestAlpha");
+		panel.add(sf_one_min_dest_alpha, "4, 20");
+		
+		JRadioButton df_one_min_dest_alpha = new JRadioButton("OneMinDestAlpha");
+		panel.add(df_one_min_dest_alpha, "12, 20");
+		
+		JRadioButton sf_one_minus_dest_col = new JRadioButton("OneMinDestCol");
+		panel.add(sf_one_minus_dest_col, "4, 22");
+		
+		JRadioButton df_one_min_src_alpha = new JRadioButton("OneMinSrcAlpha");
+		panel.add(df_one_min_src_alpha, "12, 22");
+		
+		JRadioButton sf_one_min_src_alpha = new JRadioButton("OneMinSrcAlpha");
+		panel.add(sf_one_min_src_alpha, "4, 24");
+		
+		JRadioButton df_one_min_src_col = new JRadioButton("OneMinSrcCol");
+		panel.add(df_one_min_src_col, "12, 24");
+		
+		JRadioButton sf_src_alpha_sat = new JRadioButton("SrcAlphaSaturate");
+		panel.add(sf_src_alpha_sat, "4, 26");
+		
+		JRadioButton df_zero = new JRadioButton("Zero");
+		panel.add(df_zero, "12, 26");
+		
+		JRadioButton sf_zero = new JRadioButton("Zero");
+		panel.add(sf_zero, "4, 28");
+		source.add(sf_zero);
 		
 		source.add(sf_source);
 		source.add(sf_dest);
 		source.add(rdbtnConstalpha);
 		source.add(rdbtnConstcolor);
 		source.add(destColorRadioButton);
-		source.add(oneSRadioButton);
+		source.add(sf_one);
+		source.add(sf_one_min_const_alpha);
+		source.add(sf_one_min_const_col);
+		source.add(sf_one_min_dest_alpha);
+		source.add(sf_one_minus_dest_col);
+		source.add(sf_one_min_src_alpha);
+		source.add(sf_src_alpha_sat);
+		source.add(sf_zero);
+		
 		
 		dest.add(df_src);
 		dest.add(df_dest);
@@ -189,12 +247,12 @@ public class BlendMenu extends JFrame {
 		dest.add(df_const_color);
 		dest.add(df_source_color);
 		dest.add(df_one);
-		/*dest.add(df_dest);
-		dest.add(df_dest);
-		dest.add(df_dest);
-		dest.add(df_dest);
-		dest.add(df_dest);
-		dest.add(df_dest);*/
+		dest.add(df_one_min_const_alpha);
+		dest.add(df_one_min_const_color);
+		dest.add(df_one_min_dest_alpha);
+		dest.add(df_one_min_src_alpha);
+		dest.add(df_one_min_src_col);
+		dest.add(df_zero);
 
 		
 		test.add(tf_gt);
@@ -205,6 +263,8 @@ public class BlendMenu extends JFrame {
 		test.add(tf_lOrE);
 		test.add(tf_never);
 		test.add(tf_notEqual);
+		
+
 		
 		this.setVisible(false);
 		

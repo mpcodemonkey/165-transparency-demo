@@ -595,10 +595,10 @@ public class TransparencyDemo extends BaseGame {
 		case 9: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusDestinationAlpha);
 		break;
 		
-		case 10: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceColor);
+		case 10: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceAlpha);
 		break;
 		
-		case 11: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceAlpha);
+		case 11: bl.setDestinationFunction(BlendState.DestinationFunction.OneMinusSourceColor);
 		break;
 		
 		case 12: bl.setDestinationFunction(BlendState.DestinationFunction.Zero);
