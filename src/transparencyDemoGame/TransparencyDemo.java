@@ -240,7 +240,7 @@ public class TransparencyDemo extends BaseGame {
 		// Build a skybox
 		s = new SkyBox();
 		Texture tex = TextureManager.loadTexture2D("." + File.separator + "tex"
-				+ File.separator + "sky.jpg");
+				+ File.separator + "floor2.jpg");
 		s.setTexture(Face.South, tex);
 		s.setTexture(Face.North, tex);
 		s.setTexture(Face.East, tex);
@@ -255,7 +255,7 @@ public class TransparencyDemo extends BaseGame {
 		// build a ground plane
 		Rectangle rec = new Rectangle();
 		rec.setTexture(TextureManager.loadTexture2D("." + File.separator
-				+ "tex" + File.separator + "floor.jpg"));
+				+ "tex" + File.separator + "checker.png"));
 		rec.translate(50, 0, 50);
 		rec.rotate(90, new Vector3D(1, 0, 0));
 		rec.scale(100, 100, 100);
@@ -331,13 +331,17 @@ public class TransparencyDemo extends BaseGame {
 		
 		//make 3 rupees in the transparent group, one of which is solid
 		r1.translate(-2, 0, 0);
-		r2.translate(-4, 0, 0);
+		
+		r2.translate(30, 5, 30);
+		
+		
 		r3.translate(6, 0, 0);
 		
 		
 		
 		planets.addChild(r1);
-		planets.addChild(r2);
+		
+		//planets.addChild(r2);
 		planets.addChild(r3);
 		
 		//put a spike ball in the final group
@@ -359,6 +363,7 @@ public class TransparencyDemo extends BaseGame {
 		root = new Group("root-node");
 		root.addChild(sun);
 		
+		this.addGameWorldObject(r2);
 		this.addGameWorldObject(root);
 	}
 

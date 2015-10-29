@@ -21,7 +21,7 @@ public class Rupee extends Treasure
 	}; 
 	
 	//private static float[] vrts = new float[] {0,1,0,-1,-1,1,1,-1,1,1,-1,-1,-1,-1,-1}; 
-	private static float[] cl = new float[] {.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,0,.5f,0,1,0,.5f,0,1,0,.5f,0,1,0,0,.5f,1,0,0,.5f,1,0,0,.5f,1,0,0,.5f,1};
+	private static float[] cl = new float[] {.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,.5f,0,0,1,};
 	private static float[] altcl = new float[]{0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f,0f,1f,1f,1f};
 	
 	private static int[] triangles = new int[] 
