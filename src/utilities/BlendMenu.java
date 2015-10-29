@@ -75,6 +75,8 @@ public class BlendMenu extends JFrame {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -117,130 +119,134 @@ public class BlendMenu extends JFrame {
 		panel.add(lblSourceFunction, "4, 2");
 		
 		JLabel lblDestFunction = new JLabel("Dest Function");
-		panel.add(lblDestFunction, "12, 2");
+		panel.add(lblDestFunction, "14, 2");
 		
 		JLabel lblTestFunction = new JLabel("Test Function");
-		panel.add(lblTestFunction, "20, 2");
+		panel.add(lblTestFunction, "22, 2");
 		
 		JLabel lblBlendEquation = new JLabel("Blend Equation");
-		panel.add(lblBlendEquation, "28, 2");
+		panel.add(lblBlendEquation, "30, 2");
 		
 		JRadioButton sf_source = new JRadioButton("Source");
 		sf_source.setSelected(true);
 		panel.add(sf_source, "4, 4");
 		
-		JRadioButton df_src = new JRadioButton("Source");
-		df_src.setSelected(true);
-		panel.add(df_src, "12, 4");
+		
+		JRadioButton df_dest = new JRadioButton("Dest");
+		df_dest.setSelected(true);
+		panel.add(df_dest, "14, 4");
+		dest.add(df_dest);
 		
 		JRadioButton tf_gt = new JRadioButton("Greater");
 		tf_gt.setSelected(true);
-		panel.add(tf_gt, "20, 4");
+		panel.add(tf_gt, "22, 4");
 		
 		JRadioButton be_add = new JRadioButton("Add");
 		be_add.setSelected(true);
-		panel.add(be_add, "28, 4");
+		panel.add(be_add, "30, 4");
 		
 		JRadioButton sf_dest = new JRadioButton("Dest");
 		panel.add(sf_dest, "4, 6");
 		
+		JRadioButton df_src = new JRadioButton("Source");
+		panel.add(df_src, "14, 6");
 		
-		JRadioButton df_dest = new JRadioButton("Dest");
-		panel.add(df_dest, "12, 6");
+		
+		dest.add(df_src);
 		
 		JRadioButton tf_e = new JRadioButton("Equal");
-		panel.add(tf_e, "20, 6");
+		panel.add(tf_e, "22, 6");
 		
 		JRadioButton be_max = new JRadioButton("Max");
-		panel.add(be_max, "28, 6");
+		panel.add(be_max, "30, 6");
 		
 		
 		JRadioButton rdbtnConstalpha = new JRadioButton("ConstAlpha");
 		panel.add(rdbtnConstalpha, "4, 8");
 		
 		JRadioButton df_const = new JRadioButton("ConstAlpha");
-		panel.add(df_const, "12, 8");
+		panel.add(df_const, "14, 8");
 		
 		JRadioButton tf_gOrE = new JRadioButton("GreaterOrEqual");
-		panel.add(tf_gOrE, "20, 8");
+		panel.add(tf_gOrE, "22, 8");
 		
 		JRadioButton be_min = new JRadioButton("Min");
-		panel.add(be_min, "28, 8");
+		panel.add(be_min, "30, 8");
 		
 		JRadioButton rdbtnConstcolor = new JRadioButton("ConstColor");
 		panel.add(rdbtnConstcolor, "4, 10");
 		
 		JRadioButton df_const_color = new JRadioButton("ConstColor");
-		panel.add(df_const_color, "12, 10");
+		panel.add(df_const_color, "14, 10");
 		
 		JRadioButton tf_always = new JRadioButton("Always");
-		panel.add(tf_always, "20, 10");
+		panel.add(tf_always, "22, 10");
 		
 		JRadioButton be_sub = new JRadioButton("Subtract");
-		panel.add(be_sub, "28, 10");
+		panel.add(be_sub, "30, 10");
 		
 		JRadioButton destColorRadioButton = new JRadioButton("DestColor");
 		panel.add(destColorRadioButton, "4, 12");
 		
 		JRadioButton df_source_color = new JRadioButton("SourceColor");
-		panel.add(df_source_color, "12, 12");
+		panel.add(df_source_color, "14, 12");
 		
 		JRadioButton tf_lt = new JRadioButton("LessThan");
-		panel.add(tf_lt, "20, 12");
+		panel.add(tf_lt, "22, 12");
 		
 		JRadioButton be_rev_sub = new JRadioButton("Reverse Sub");
-		panel.add(be_rev_sub, "28, 12");
+		panel.add(be_rev_sub, "30, 12");
 		
 		JRadioButton sf_one = new JRadioButton("One");
 		panel.add(sf_one, "4, 14");
 		
 		JRadioButton df_one = new JRadioButton("One");
-		panel.add(df_one, "12, 14");
+		panel.add(df_one, "14, 14");
 		
 		JRadioButton tf_lOrE = new JRadioButton("LessOrEqual");
-		panel.add(tf_lOrE, "20, 14");
+		panel.add(tf_lOrE, "22, 14");
 		
 		JRadioButton sf_one_min_const_alpha = new JRadioButton("OneMinConstAlpha");
 		panel.add(sf_one_min_const_alpha, "4, 16");
 		
 		JRadioButton df_one_min_const_alpha = new JRadioButton("OneMinConstAlpha");
-		panel.add(df_one_min_const_alpha, "12, 16");
+		panel.add(df_one_min_const_alpha, "14, 16");
 		
 		JRadioButton tf_never = new JRadioButton("Never");
-		panel.add(tf_never, "20, 16");
+		panel.add(tf_never, "22, 16");
 		
 		JRadioButton sf_one_min_const_col = new JRadioButton("OneMinConstCol");
 		panel.add(sf_one_min_const_col, "4, 18");
 		
 		JRadioButton df_one_min_const_color = new JRadioButton("OneMinConstCol");
-		panel.add(df_one_min_const_color, "12, 18");
+		panel.add(df_one_min_const_color, "14, 18");
 		
 		JRadioButton tf_notEqual = new JRadioButton("NotEqual");
-		panel.add(tf_notEqual, "20, 18");
+		panel.add(tf_notEqual, "22, 18");
 		
 		JRadioButton sf_one_min_dest_alpha = new JRadioButton("OneMinDestAlpha");
 		panel.add(sf_one_min_dest_alpha, "4, 20");
 		
 		JRadioButton df_one_min_dest_alpha = new JRadioButton("OneMinDestAlpha");
-		panel.add(df_one_min_dest_alpha, "12, 20");
+		panel.add(df_one_min_dest_alpha, "14, 20");
 		
 		JRadioButton sf_one_minus_dest_col = new JRadioButton("OneMinDestCol");
 		panel.add(sf_one_minus_dest_col, "4, 22");
 		
 		JRadioButton df_one_min_src_alpha = new JRadioButton("OneMinSrcAlpha");
-		panel.add(df_one_min_src_alpha, "12, 22");
+		panel.add(df_one_min_src_alpha, "14, 22");
 		
 		JRadioButton sf_one_min_src_alpha = new JRadioButton("OneMinSrcAlpha");
 		panel.add(sf_one_min_src_alpha, "4, 24");
 		
 		JRadioButton df_one_min_src_col = new JRadioButton("OneMinSrcCol");
-		panel.add(df_one_min_src_col, "12, 24");
+		panel.add(df_one_min_src_col, "14, 24");
 		
 		JRadioButton sf_src_alpha_sat = new JRadioButton("SrcAlphaSaturate");
 		panel.add(sf_src_alpha_sat, "4, 26");
 		
 		JRadioButton df_zero = new JRadioButton("Zero");
-		panel.add(df_zero, "12, 26");
+		panel.add(df_zero, "14, 26");
 		
 		JRadioButton sf_zero = new JRadioButton("Zero");
 		panel.add(sf_zero, "4, 28");
@@ -260,9 +266,8 @@ public class BlendMenu extends JFrame {
 		source.add(sf_src_alpha_sat);
 		source.add(sf_zero);
 		
-		
-		dest.add(df_src);
 		dest.add(df_dest);
+		dest.add(df_src);
 		dest.add(df_const);
 		dest.add(df_const_color);
 		dest.add(df_source_color);
