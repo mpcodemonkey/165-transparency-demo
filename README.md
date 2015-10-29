@@ -1,4 +1,4 @@
-# 165-trasnparency-demo
+# 165-transparency-demo
 
 This is an attempt to display all possible combinations of blending source, destination, test, and equation enumerable cominations currently present in SAGE(The Simple Adaptable Game Engine). This project is based off of a special project undertaken by Jonathan Tinney for Dr. Scott Gordon, in relationship to implementing transparency in SAGE.
 
